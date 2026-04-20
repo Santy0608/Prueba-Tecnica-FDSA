@@ -33,7 +33,7 @@ public class Hotel {
     @Column(name = "activo")
     private boolean activo;
     @Column(name = "created_at")
-    public LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     public Long getId() {
         return id;
