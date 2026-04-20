@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface TipoHabitacionRepository extends JpaRepository<TipoHabitacion, Long>, JpaSpecificationExecutor<TipoHabitacion> {
 
-    
+
 
 }
 
