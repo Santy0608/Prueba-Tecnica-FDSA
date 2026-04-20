@@ -27,9 +27,9 @@ public class TipoHabitacionController {
         return tipoHabitacionService.listadoTiposHabitaciones();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<TipoHabitacionDTO> buscarTipoHabitacionPorId(@PathVariable long id){
-        Optional<TipoHabitacionDTO> tipoHabitacionOptional = tipoHabitacionService.buscarTipoHabitacionPorId(id);
+    @GetMapping("/{idTipoHabitacion}")
+    public ResponseEntity<TipoHabitacionDTO> buscarTipoHabitacionPorId(@PathVariable long idTipoHabitacion){
+        Optional<TipoHabitacionDTO> tipoHabitacionOptional = tipoHabitacionService.buscarTipoHabitacionPorId(idTipoHabitacion);
         if (tipoHabitacionOptional.isPresent()){
             return ResponseEntity.ok(tipoHabitacionOptional.orElseThrow());
         }
@@ -45,8 +45,8 @@ public class TipoHabitacionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(tipoHabitacionService.guardarTipoHabitacion(tipoHabitacionDTO));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarTipoHabitacion(@RequestBody TipoHabitacionDTO tipoHabitacionDTO, BindingResult result, @PathVariable long id){
+    @PutMapping("/{idTipoHabitacion}")
+    public ResponseEntity<?> actualizarTipoHabitacion(@RequestBody TipoHabitacionDTO tipoHabitacionDTO, BindingResult result, @PathVariable long idTipoHabitacion){
         if (result.hasErrors()){
             Map<String, String> errors = new HashMap<>();
             result.getFieldErrors().forEach( error -> {
@@ -54,16 +54,16 @@ public class TipoHabitacionController {
             });
             return ResponseEntity.badRequest().body(null);
         }
-        return tipoHabitacionService.actualiarTipoHabitacion(tipoHabitacionDTO, id)
+        return tipoHabitacionService.actualiarTipoHabitacion(tipoHabitacionDTO, idTipoHabitacion)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarTipoHabitacionPorId(@PathVariable long id){
-        Optional<TipoHabitacionDTO> tipoHabitacionOptional = tipoHabitacionService.buscarTipoHabitacionPorId(id);
+    @DeleteMapping("/{idTipoHabitacion}")
+    public ResponseEntity<Void> eliminarTipoHabitacionPorId(@PathVariable long idTipoHabitacion){
+        Optional<TipoHabitacionDTO> tipoHabitacionOptional = tipoHabitacionService.buscarTipoHabitacionPorId(idTipoHabitacion);
         if (tipoHabitacionOptional.isPresent()) {
-            tipoHabitacionService.eliminarTipoHabitacionPorId(id);
+            tipoHabitacionService.eliminarTipoHabitacionPorId(idTipoHabitacion);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();

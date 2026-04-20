@@ -14,8 +14,8 @@ public class Hotel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "id_hotel")
+    private Long idHotel;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "descripcion")
@@ -35,12 +35,12 @@ public class Hotel {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public Long getId() {
-        return id;
+    public Long getIdHotel() {
+        return idHotel;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdHotel(Long idHotel) {
+        this.idHotel = idHotel;
     }
 
     public String getNombre() {

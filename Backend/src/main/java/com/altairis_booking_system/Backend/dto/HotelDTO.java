@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class HotelDTO {
 
-    private Long id;
+    private Long idHotel;
 
     private String nombre;
     private String descripcion;
@@ -19,12 +19,12 @@ public class HotelDTO {
 
     private LocalDateTime created_at;
 
-    public Long getId() {
-        return id;
+    public Long getIdHotel() {
+        return idHotel;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdHotel(Long idHotel) {
+        this.idHotel = idHotel;
     }
 
     public String getNombre() {

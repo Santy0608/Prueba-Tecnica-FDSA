@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class TipoHabitacionDTO {
 
-    private Long id;
+    private Long idTipoHabitacion;
     private String nombre;
     private String descripcion;
     private Integer capacidad;
@@ -19,12 +19,12 @@ public class TipoHabitacionDTO {
     private Long hotelId;
     private String nombreHotel;
 
-    public Long getId() {
-        return id;
+    public Long getIdTipoHabitacion() {
+        return idTipoHabitacion;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idTipoHabitacion) {
+        this.idTipoHabitacion = idTipoHabitacion;
     }
 
     public String getNombre() {

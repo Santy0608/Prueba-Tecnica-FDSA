@@ -89,7 +89,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public HotelDTO convertirADTO(Hotel hotel) {
         HotelDTO dto = new HotelDTO();
-        dto.setId(hotel.getId());
+        dto.setIdHotel(hotel.getIdHotel());
         dto.setNombre(hotel.getNombre());
         dto.setDescripcion(hotel.getDescripcion());
         dto.setCiudad(hotel.getCiudad());

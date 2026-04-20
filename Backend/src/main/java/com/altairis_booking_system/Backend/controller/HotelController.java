@@ -27,9 +27,9 @@ public class HotelController {
         return hotelService.listadoHoteles();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<HotelDTO> buscarHotelPorId(@PathVariable long id){
-        Optional<HotelDTO> hotelOptinoal = hotelService.buscarHotelPorId(id);
+    @GetMapping("/{idHotel}")
+    public ResponseEntity<HotelDTO> buscarHotelPorId(@PathVariable long idHotel){
+        Optional<HotelDTO> hotelOptinoal = hotelService.buscarHotelPorId(idHotel);
         if (hotelOptinoal.isPresent()){
             return ResponseEntity.ok(hotelOptinoal.orElseThrow());
         }
@@ -45,8 +45,8 @@ public class HotelController {
         return ResponseEntity.status(HttpStatus.CREATED).body(hotelService.guardarHotel(hotelDTO));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarHotel(@RequestBody HotelDTO hotelDTO, BindingResult result, @PathVariable long id){
+    @PutMapping("/{idHotel}")
+    public ResponseEntity<?> actualizarHotel(@RequestBody HotelDTO hotelDTO, BindingResult result, @PathVariable long idHotel){
         if (result.hasErrors()){
             Map<String, String> errors = new HashMap<>();
             result.getFieldErrors().forEach( error -> {
@@ -54,16 +54,16 @@ public class HotelController {
             });
             return ResponseEntity.badRequest().body(null);
         }
-        return hotelService.actualizarHotel(hotelDTO, id)
+        return hotelService.actualizarHotel(hotelDTO, idHotel)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarHotel(@PathVariable Long id){
-        Optional<HotelDTO> hotelOptional = hotelService.buscarHotelPorId(id);
+    @DeleteMapping("/{idHotel}")
+    public ResponseEntity<Void> eliminarHotel(@PathVariable Long idHotel){
+        Optional<HotelDTO> hotelOptional = hotelService.buscarHotelPorId(idHotel);
         if (hotelOptional.isPresent()){
-            hotelService.eliminarHotelPorId(id);
+            hotelService.eliminarHotelPorId(idHotel);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();

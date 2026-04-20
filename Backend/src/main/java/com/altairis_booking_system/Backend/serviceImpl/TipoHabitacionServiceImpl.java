@@ -85,7 +85,7 @@ public class TipoHabitacionServiceImpl implements TipoHabitacionService {
     @Override
     public TipoHabitacionDTO convertirADTO(TipoHabitacion tipoHabitacion) {
         TipoHabitacionDTO dto = new TipoHabitacionDTO();
-        dto.setId(tipoHabitacion.getId());
+        dto.setId(tipoHabitacion.getIdTipoHabitacion());
         dto.setNombre(tipoHabitacion.getNombre());
         dto.setDescripcion(tipoHabitacion.getDescripcion());
         dto.setCapacidad(tipoHabitacion.getCapacidad());
@@ -93,7 +93,7 @@ public class TipoHabitacionServiceImpl implements TipoHabitacionService {
         dto.setActivo(tipoHabitacion.isActivo());
         dto.setCreatedAt(tipoHabitacion.getCreatedAt());
         if (tipoHabitacion.getHotel() != null){
-            dto.setHotelId(tipoHabitacion.getHotel().getId());
+            dto.setHotelId(tipoHabitacion.getHotel().getIdHotel());
             dto.setNombreHotel(tipoHabitacion.getHotel().getNombre());
         }
         return dto;

@@ -16,8 +16,8 @@ public class TipoHabitacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "id_tipo_habitacion")
+    private Long idTipoHabitacion;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "descripcion")
@@ -32,15 +32,15 @@ public class TipoHabitacion {
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id_hotel", nullable = false)
     private Hotel hotel;
 
-    public Long getId() {
-        return id;
+    public Long getIdTipoHabitacion() {
+        return idTipoHabitacion;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdTipoHabitacion(Long idTipoHabitacion) {
+        this.idTipoHabitacion = idTipoHabitacion;
     }
 
     public String getNombre() {
