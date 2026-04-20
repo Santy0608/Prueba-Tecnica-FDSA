@@ -31,6 +31,10 @@ public class TipoHabitacion {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id", nullable = false)
+    private Hotel hotel;
+
     public Long getId() {
         return id;
     }
@@ -85,5 +89,13 @@ public class TipoHabitacion {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Hotel getHotel(){
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel){
+        this.hotel = hotel;
     }
 }
