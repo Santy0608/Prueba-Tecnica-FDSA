@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public class TipoHabitacionServiceImpl implements TipoHabitacionService {
         tipoHabitacion.setCapacidad(tipoHabitacionDTO.getCapacidad());
         tipoHabitacion.setPrecioBase(tipoHabitacionDTO.getPrecioBase());
         tipoHabitacion.setActivo(tipoHabitacionDTO.isActivo());
-        tipoHabitacion.setCreatedAt(tipoHabitacionDTO.getCreatedAt());
+        tipoHabitacion.setCreatedAt(LocalDateTime.now());
         if (tipoHabitacionDTO.getHotelId() != null){
             hotelRepository.findById(tipoHabitacionDTO.getHotelId())
                     .ifPresent(tipoHabitacion::setHotel);
