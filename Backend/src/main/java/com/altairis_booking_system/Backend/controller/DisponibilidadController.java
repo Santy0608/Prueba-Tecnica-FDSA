@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,14 @@ public class DisponibilidadController {
         return disponibilidadService.actualizarDisponibilidad(disponibilidadDTO, id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/filtrar")
+    public ResponseEntity<List<DisponibilidadDTO>> filtrar(
+            @RequestParam(required = false) Long tipoHabitacionId,
+            @RequestParam(required = false) LocalDate fechaInicio,
+            @RequestParam(required = false) LocalDate fechaFin) {
+        return ResponseEntity.ok(disponibilidadService.filtrar(tipoHabitacionId, fechaInicio, fechaFin));
     }
 
     private static ResponseEntity<Map<String, String>> validation(BindingResult result) {

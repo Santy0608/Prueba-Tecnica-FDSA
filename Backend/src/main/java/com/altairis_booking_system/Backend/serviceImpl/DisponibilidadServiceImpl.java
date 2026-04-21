@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -89,5 +90,21 @@ public class DisponibilidadServiceImpl implements DisponibilidadService {
             dto.setNombreTipoHabitacion(disponibilidad.getTipoHabitacion().getNombre());
         }
         return dto;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<DisponibilidadDTO> filtrar(Long tipoHabitacionId, LocalDate fechaInicio, LocalDate fechaFin) {
+        List<Disponibilidad> resultado;
+
+        if (tipoHabitacionId != null && fechaInicio != null && fechaFin != null) {
+            resultado = disponibilidadRepository.findByTipoHabitacionIdAndFechaBetween(tipoHabitacionId, fechaInicio, fechaFin);
+        } else if (fechaInicio != null && fechaFin != null) {
+            resultado = disponibilidadRepository.findByFechaBetween(fechaInicio, fechaFin);
+        } else {
+            resultado = disponibilidadRepository.findAll();
+        }
+
+        return resultado.stream().map(this::convertirADTO).collect(Collectors.toList());
     }
 }

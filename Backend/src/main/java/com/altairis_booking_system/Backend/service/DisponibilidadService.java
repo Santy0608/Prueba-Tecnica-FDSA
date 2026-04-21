@@ -3,6 +3,7 @@ package com.altairis_booking_system.Backend.service;
 import com.altairis_booking_system.Backend.domain.Disponibilidad;
 import com.altairis_booking_system.Backend.dto.DisponibilidadDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,5 +18,7 @@ public interface DisponibilidadService {
     Optional<DisponibilidadDTO> actualizarDisponibilidad(DisponibilidadDTO disponibilidadDTO, long id);
 
     DisponibilidadDTO convertirADTO(Disponibilidad disponibilidad);
+
+    List<DisponibilidadDTO> filtrar(Long tipoHabitacionId, LocalDate fechaInicio, LocalDate fechaFin);
 
 }
