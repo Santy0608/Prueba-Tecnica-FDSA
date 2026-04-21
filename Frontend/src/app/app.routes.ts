@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HotelComponent } from './components/hotel/hotel.component';
 import { HotelFormComponent } from './components/hotel-form/hotel-form.component';
+import { TipoHabitacionComponent } from './components/tipo-habitacion/tipo-habitacion.component';
 
 export const routes: Routes = [
 
@@ -9,10 +10,14 @@ export const routes: Routes = [
         path: '',
         component: MainLayoutComponent,
         children: [
+            //Rutas para hoteles
             { path: 'hoteles', component: HotelComponent },
             { path: 'hoteles/crear', component: HotelFormComponent},
             { path: 'hoteles/editar-hotel/:idHotel', component: HotelFormComponent},
-            { path: '', redirectTo: 'hoteles', pathMatch: 'full' }
+            { path: '', redirectTo: 'hoteles', pathMatch: 'full' },
+
+            //Rutas para tipos de habitaciones
+            { path: 'tipos-habitaciones', component: TipoHabitacionComponent}
         ]
     }
 
