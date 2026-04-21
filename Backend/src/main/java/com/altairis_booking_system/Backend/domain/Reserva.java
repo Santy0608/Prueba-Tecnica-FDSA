@@ -33,7 +33,7 @@ public class Reserva {
     @Column(name = "precio_total")
     private BigDecimal precioTotal;
     @Column(name = "estado")
-    private Enum estado;
+    private EstadoReserva estado;
     @Column(name = "notas")
     private String notas;
     @Column(name = "created_at")
@@ -115,11 +115,11 @@ public class Reserva {
         this.precioTotal = precioTotal;
     }
 
-    public Enum getEstado() {
+    public EstadoReserva getEstado() {
         return estado;
     }
 
-    public void setEstado(Enum estado) {
+    public void setEstado(EstadoReserva estado) {
         this.estado = estado;
     }
 
