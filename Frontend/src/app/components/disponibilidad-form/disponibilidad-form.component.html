@@ -1,0 +1,115 @@
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <div class="card shadow-lg border-0">
+            
+            <div class="card-header bg-danger text-white">
+                <h2 class="h4 mb-0">
+                    <i class="bi bi-calendar-plus-fill me-2"></i> 
+                    {{ disponibilidad.id > 0 ? "Actualizar Disponibilidad" : "Configurar Nueva Disponibilidad" }}
+                </h2>
+            </div>
+            
+            <form (ngSubmit)="onSubmit(disponibilidadForm)" #disponibilidadForm="ngForm">
+                <div class="card-body p-4">
+                    
+                    <input type="hidden" name="id" [(ngModel)]="disponibilidad.id" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fecha" class="form-label fw-bold">Fecha de Inventario <span class="text-danger">*</span></label>
+                            <input
+                                type="date"
+                                required
+                                #fecha="ngModel"
+                                name="fecha"
+                                [(ngModel)]="disponibilidad.fecha"
+                                class="form-control"
+                            />
+                            <div *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)" class="text-danger mt-1 small">
+                                La fecha es obligatoria.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="tipoHabitacionId" class="form-label fw-bold">Tipo de Habitación <span class="text-danger">*</span></label>
+                            <select name="tipoHabitacionId" required [(ngModel)]="disponibilidad.tipoHabitacionId" class="form-select">
+                                <option [ngValue]="undefined" disabled selected>Seleccione tipo...</option>
+                                <option *ngFor="let t of tiposHabitaciones" [value]="t.idTipoHabitacion">
+                                    {{ t.nombre }} ({{ t.nombreHotel }})
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="cantidadTotal" class="form-label fw-bold">Habitaciones Totales</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-hash"></i></span>
+                                <input
+                                    type="number"
+                                    name="cantidadTotal"
+                                    required
+                                    [(ngModel)]="disponibilidad.cantidadTotal"
+                                    class="form-control"
+                                    min="1"
+                                    placeholder="Ej: 20"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="cantidadDisponible" class="form-label fw-bold">Stock Inicial Disponible</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-check2-square"></i></span>
+                                <input
+                                    type="number"
+                                    name="cantidadDisponible"
+                                    required
+                                    [(ngModel)]="disponibilidad.cantidadDisponible"
+                                    class="form-control"
+                                    [max]="disponibilidad.cantidadTotal!"
+                                    min="0"
+                                    placeholder="Ej: 20"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="precio" class="form-label fw-bold">Precio Especial (Opcional)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input
+                                type="number"
+                                name="precio"
+                                [(ngModel)]="disponibilidad.precio"
+                                class="form-control"
+                                placeholder="Dejar vacío para usar precio base"
+                            />
+                        </div>
+                        <small class="text-muted">Si se deja vacío, el sistema tomará el precio por defecto del tipo de habitación.</small>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-end">
+                        <a [routerLink]="['/disponibilidades']" class="btn btn-outline-secondary me-2">
+                            Cancelar
+                        </a>
+                        
+                        <button 
+                            type="submit" 
+                            class="btn btn-dark" 
+                            [disabled]="disponibilidadForm.invalid"
+                        >
+                            <i class="bi bi-save-fill me-1"></i> 
+                            {{ disponibilidad.id > 0 ? 'Actualizar' : 'Guardar Disponibilidad' }} 
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
