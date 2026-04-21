@@ -41,6 +41,11 @@ public class TipoHabitacionController {
         return ResponseEntity.ok(tipoHabitacionService.buscarTipoHabitacionPorNombre(nombre));
     }
 
+    @GetMapping("/hotel/{hotelId}")
+    public ResponseEntity<List<TipoHabitacionDTO>> findByHotelId(@PathVariable Long hotelId) {
+        return ResponseEntity.ok(tipoHabitacionService.buscarHotelPorId(hotelId));
+    }
+
     @PostMapping
     public ResponseEntity<?> guardarTipoHabitacion(@RequestBody TipoHabitacionDTO tipoHabitacionDTO, BindingResult result){
         ResponseEntity<Map<String, String>> errors = validation(result);

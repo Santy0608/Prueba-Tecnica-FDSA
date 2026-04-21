@@ -22,4 +22,6 @@ public interface TipoHabitacionService {
 
     List<TipoHabitacionDTO> buscarTipoHabitacionPorNombre(String nombre);
 
+    List<TipoHabitacionDTO> buscarHotelPorId(long idHotel);
+
 }

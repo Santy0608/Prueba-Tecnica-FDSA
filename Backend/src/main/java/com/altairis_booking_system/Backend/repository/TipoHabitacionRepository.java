@@ -14,5 +14,8 @@ public interface TipoHabitacionRepository extends JpaRepository<TipoHabitacion, 
     @Query("SELECT t FROM TipoHabitacion t WHERE LOWER(t.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))")
     List<TipoHabitacion> findByNombreContaining(@Param("nombre") String nombre);
 
+    @Query("SELECT t FROM TipoHabitacion t WHERE t.hotel.idHotel = :hotelId")
+    List<TipoHabitacion> findByHotelId(@Param("hotelId") Long hotelId);
+
 }
 

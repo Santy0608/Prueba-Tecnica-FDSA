@@ -108,4 +108,13 @@ public class TipoHabitacionServiceImpl implements TipoHabitacionService {
                 .map(this::convertirADTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TipoHabitacionDTO> buscarHotelPorId(long idHotel) {
+        return tipoHabitacionRepository.findByHotelId(idHotel)
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
 }
