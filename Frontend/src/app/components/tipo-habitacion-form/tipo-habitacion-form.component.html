@@ -1,0 +1,115 @@
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <div class="card shadow-lg border-0">
+            
+            <div class="card-header bg-dark text-white">
+                <h2 class="h4 mb-0">
+                    <i class="bi bi-door-open-fill me-2"></i> 
+                    {{ tipoHabitacion.idTipoHabitacion > 0 ? "Actualizar Tipo de Habitación" : "Registrar Nuevo Tipo de Habitación" }}
+                </h2>
+            </div>
+            
+            <form (ngSubmit)="onSubmit(tipoHabitacionForm)" #tipoHabitacionForm="ngForm">
+                <div class="card-body p-4">
+                    
+                    <input type="hidden" name="idTipoHabitacion" [(ngModel)]="tipoHabitacion.idTipoHabitacion" />
+
+                    <div class="row">
+                        <div class="col-md-7 mb-3">
+                            <label for="nombre" class="form-label fw-bold">Nombre del Tipo <span class="text-danger">*</span></label>
+                            <input
+                                placeholder="Ej: Suite Junior, Habitación Doble"
+                                required
+                                #nombre="ngModel"
+                                name="nombre"
+                                [(ngModel)]="tipoHabitacion.nombre"
+                                type="text"
+                                class="form-control"
+                            />
+                            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mt-1 small">
+                                El nombre es obligatorio.
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 mb-3">
+                            <label for="capacidad" class="form-label fw-bold">Capacidad Máxima</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-people"></i></span>
+                                <input
+                                    type="number"
+                                    name="capacidad"
+                                    [(ngModel)]="tipoHabitacion.capacidad"
+                                    class="form-control"
+                                    min="1"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="precioBase" class="form-label fw-bold">Precio Base por Noche <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input
+                                type="number"
+                                name="precioBase"
+                                required
+                                #precio="ngModel"
+                                [(ngModel)]="tipoHabitacion.precioBase"
+                                class="form-control"
+                                placeholder="0.00"
+                            />
+                        </div>
+                        <div *ngIf="precio.invalid && (precio.dirty || precio.touched)" class="text-danger mt-1 small">
+                            El precio es obligatorio para la reserva.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label fw-bold">Descripción de Amenidades</label>
+                        <textarea
+                            placeholder="Ej: WiFi de alta velocidad, Aire acondicionado, Minibar..."
+                            name="descripcion"
+                            [(ngModel)]="tipoHabitacion.descripcion"
+                            class="form-control"
+                            rows="3"
+                        ></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="hotelId" class="form-label fw-bold">Hotel Correspondiente <span class="text-danger">*</span></label>
+                        <select name="hotelId" required [(ngModel)]="tipoHabitacion.hotelId" class="form-select">
+                            <option [ngValue]="undefined" disabled selected>Seleccione el hotel...</option>
+                            <option *ngFor="let h of hoteles" [value]="h.idHotel">
+                                {{ h.nombre }} ({{ h.ciudad }})
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-check form-switch mb-4">
+                        <input class="form-check-input" type="checkbox" name="activo" [(ngModel)]="tipoHabitacion.activo" id="tipoActivo">
+                        <label class="form-check-label fw-bold" for="tipoActivo">Categoría habilitada para la venta</label>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-end">
+                        <a [routerLink]="['/tipos-habitaciones']" class="btn btn-outline-secondary me-2">
+                            Cancelar
+                        </a>
+                        
+                        <button 
+                            type="submit" 
+                            class="btn btn-dark" 
+                            [disabled]="tipoHabitacionForm.invalid"
+                        >
+                            <i class="bi bi-save-fill me-1"></i> 
+                            {{ tipoHabitacion.idTipoHabitacion > 0 ? 'Actualizar' : 'Guardar Tipo' }} 
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

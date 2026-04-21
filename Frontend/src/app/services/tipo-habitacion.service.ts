@@ -23,12 +23,12 @@ export class TipoHabitacionService {
     return this.http.get<TipoHabitacion>(`${this.url}/${id}`);
   }
     
-  guardarTipoHabitacion(tipoHabitacion: TipoHabitacion){
-    return this.http.post(this.url, tipoHabitacion);
+  guardarTipoHabitacion(tipoHabitacion: TipoHabitacion): Observable<TipoHabitacion>{
+    return this.http.post<TipoHabitacion>(this.url, tipoHabitacion);
   }
 
-  editarTipoHabitacion(tipoHabitacion: TipoHabitacion) {
-    return this.http.put(`${this.url}/${tipoHabitacion.idTipoHabitacion}`, tipoHabitacion);
+  editarTipoHabitacion(tipoHabitacion: TipoHabitacion): Observable<TipoHabitacion> {
+    return this.http.put<TipoHabitacion>(`${this.url}/${tipoHabitacion.idTipoHabitacion}`, tipoHabitacion);
   }
 
   eliminarTipoHabitacionPorId(idTipoHabitacion: number){
