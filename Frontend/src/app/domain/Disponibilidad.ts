@@ -9,4 +9,5 @@ export class Disponibilidad{
     tipoHabitacionId?: number;
     nombreTipoHabitacion?: string;
 
+    
 }

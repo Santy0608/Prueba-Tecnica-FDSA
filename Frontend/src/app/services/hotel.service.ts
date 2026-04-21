@@ -24,11 +24,11 @@ export class HotelService {
   }
     
   guardarHotel(hotel: Hotel){
-    return this.http.post(this.url, hotel);
+    return this.http.post<Hotel>(this.url, hotel);
   }
 
   editarHotel(hotel: Hotel) {
-    return this.http.put(`${this.url}/${hotel.idHotel}`, hotel);
+    return this.http.put<Hotel>(`${this.url}/${hotel.idHotel}`, hotel);
   }
 
   eliminarHotelPorId(idHotel: number){
