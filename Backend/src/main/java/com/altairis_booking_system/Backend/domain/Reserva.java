@@ -33,8 +33,9 @@ public class Reserva {
     private Integer cantidadHabitaciones;
     @Column(name = "precio_total")
     private BigDecimal precioTotal;
-    @Column(name = "estado")
-    private EstadoReserva estado;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('PENDIENTE','CONFIRMADA','CANCELADA')")
+    private EstadoReserva estado = EstadoReserva.PENDIENTE;
     @Column(name = "notas")
     private String notas;
     @Column(name = "created_at")

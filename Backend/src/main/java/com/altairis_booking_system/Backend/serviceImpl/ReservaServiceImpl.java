@@ -53,7 +53,7 @@ public class ReservaServiceImpl implements ReservaService {
                 .orElseThrow(() -> new RuntimeException("Tipo de habitación no encontrado"));
 
         LocalDate fecha = reservaDTO.getFechaCheckin();
-        while (fecha.isBefore(reservaDTO.getFechaCheckin())){
+        while (fecha.isBefore(reservaDTO.getFechaCheckout())){
             Disponibilidad disponibilidad = disponibilidadRepository.
                     findByTipoHabitacionIdAndFecha(tipo.getIdTipoHabitacion(), fecha)
                     .orElseThrow(() -> new RuntimeException("No hay disponibilidad para esa fecha"));

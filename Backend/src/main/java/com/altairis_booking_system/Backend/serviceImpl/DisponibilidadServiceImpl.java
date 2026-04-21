@@ -81,6 +81,7 @@ public class DisponibilidadServiceImpl implements DisponibilidadService {
         dto.setId(disponibilidad.getId());
         dto.setFecha(disponibilidad.getFecha());
         dto.setCantidadTotal(disponibilidad.getCantidadTotal());
+        dto.setCantidadDisponible(disponibilidad.getCantidadDisponible());
         dto.setPrecio(disponibilidad.getPrecio());
         dto.setCreatedAt(disponibilidad.getCreatedAt());
         if (disponibilidad.getTipoHabitacion() != null){

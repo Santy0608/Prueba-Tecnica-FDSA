@@ -3,13 +3,14 @@ package com.altairis_booking_system.Backend.dto;
 import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 public class DisponibilidadDTO {
 
     private Long id;
-    private Date fecha;
+    private LocalDate fecha;
     private Integer cantidadTotal;
     private Integer cantidadDisponible;
     private BigDecimal precio;
@@ -26,11 +27,11 @@ public class DisponibilidadDTO {
         this.id = id;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

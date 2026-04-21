@@ -3,8 +3,10 @@ package com.altairis_booking_system.Backend.domain;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -19,7 +21,7 @@ public class Disponibilidad {
     @Column(name = "id")
     private Long id;
     @Column(name = "fecha")
-    private Date fecha;
+    private LocalDate fecha;
     @Column(name = "cantidad_total")
     private Integer cantidadTotal;
     @Column(name = "cantidad_disponible")
@@ -41,11 +43,11 @@ public class Disponibilidad {
         this.id = id;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

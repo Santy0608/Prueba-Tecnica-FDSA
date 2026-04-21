@@ -18,7 +18,7 @@ public class ReservaDTO {
     private LocalDate fechaCheckout;
     private Integer cantidadHabitaciones;
     private BigDecimal precioTotal;
-    private EstadoReserva estado;
+    private EstadoReserva estado = EstadoReserva.PENDIENTE;
     private String notas;
     private LocalDateTime createdAt;
 
