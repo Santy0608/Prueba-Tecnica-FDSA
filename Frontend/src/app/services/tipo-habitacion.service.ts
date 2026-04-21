@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TipoHabitacion } from '../domain/TipoHabitacion';
 import { Hotel } from '../domain/Hotel';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoHabitacionService {
 
-   private url: string = '${environment.apiUrl}/tipos-habitaciones';
+   private url: string = `${environment.apiUrl}/tipos-habitaciones`;
 
   constructor(private http: HttpClient) { 
 

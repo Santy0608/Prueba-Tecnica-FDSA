@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 export class DisponibilidadService {
 
   
-  private url: string = '${environment.apiUrl}/disponibilidades';
+  private url: string = `${environment.apiUrl}/disponibilidades`;
 
   constructor(private http: HttpClient) { 
 
