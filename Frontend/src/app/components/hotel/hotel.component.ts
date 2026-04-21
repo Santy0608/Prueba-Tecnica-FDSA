@@ -17,6 +17,7 @@ export class HotelComponent implements OnInit{
   hoteles: Hotel[] = [];
   errors: any;  
   terminoBusqueda: string = '';
+  hotelesFiltrados: Hotel[] = [];
 
   constructor(private hotelService: HotelService, private router: Router){
 

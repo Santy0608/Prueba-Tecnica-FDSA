@@ -17,6 +17,7 @@ export class TipoHabitacionComponent implements OnInit{
   tiposHabitaciones: TipoHabitacion[] = [];
   errors: any;
   terminoBusqueda: string = ';'
+  tiposHabitacionesFiltrados: TipoHabitacion[] = [];
 
   constructor(private tipoHabitacionService: TipoHabitacionService, private router: Router){
 
