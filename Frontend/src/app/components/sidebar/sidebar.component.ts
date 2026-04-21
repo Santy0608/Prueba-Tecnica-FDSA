@@ -11,8 +11,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class SidebarComponent {
   menuItems = [
     { label: 'Hoteles', initials: 'H', route: '/hoteles' },
-    { label: 'Tipos de Habitación', initials: 'T', route: '/habitaciones' },
-    { label: 'Disponibilidad', initials: 'D', route: '/disponibilidad' },
+    { label: 'Tipos de Habitación', initials: 'T', route: '/tipos-habitaciones' },
+    { label: 'Disponibilidad', initials: 'D', route: '/disponibilidades' },
     { label: 'Reservas', initials: 'R', route: '/reservas' }
   ];
 }
