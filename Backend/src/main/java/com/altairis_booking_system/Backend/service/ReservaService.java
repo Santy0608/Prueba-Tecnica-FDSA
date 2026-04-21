@@ -27,4 +27,6 @@ public interface ReservaService {
     List<ReservaDTO> buscarPorFechas(LocalDate inicio, LocalDate fin);
 
     ReservaDTO convertirADTO(Reserva reserva);
+
+    List<ReservaDTO> filtrar(EstadoReserva estado, String nombre, LocalDate fechaInicio, LocalDate fechaFin);
 }

@@ -163,6 +163,14 @@ public class ReservaServiceImpl implements ReservaService {
         return dto;
     }
 
+    @Transactional(readOnly = true)
+    public List<ReservaDTO> filtrar(EstadoReserva estado, String nombre, LocalDate fechaInicio, LocalDate fechaFin) {
+        return reservaRepository.filtrar(estado, nombre, fechaInicio, fechaFin)
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
+
     private Reserva toEntity(ReservaDTO dto, TipoHabitacion tipo) {
         Reserva reserva = new Reserva();
         reserva.setTipoHabitacion(tipo);

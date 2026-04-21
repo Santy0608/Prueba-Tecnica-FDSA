@@ -38,6 +38,15 @@ public class ReservaController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/filtrar")
+    public ResponseEntity<List<ReservaDTO>> filtrar(
+            @RequestParam(required = false) EstadoReserva estado,
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) LocalDate fechaInicio,
+            @RequestParam(required = false) LocalDate fechaFin) {
+        return ResponseEntity.ok(reservaService.filtrar(estado, nombre, fechaInicio, fechaFin));
+    }
+
     @GetMapping("/estado/{estado}")
     public ResponseEntity<List<ReservaDTO>> findByEstado(@PathVariable EstadoReserva estado) {
         return ResponseEntity.ok(reservaService.buscarPorEstado(estado));
