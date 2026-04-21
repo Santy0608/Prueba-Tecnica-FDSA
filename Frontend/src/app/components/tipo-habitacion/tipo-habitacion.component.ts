@@ -5,6 +5,8 @@ import { Router, RouterModule } from '@angular/router';
 import { TipoHabitacionService } from '../../services/tipo-habitacion.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { Hotel } from '../../domain/Hotel';
+import { HotelService } from '../../services/hotel.service';
 
 @Component({
   selector: 'app-tipo-habitacion',
@@ -19,12 +21,17 @@ export class TipoHabitacionComponent implements OnInit{
   terminoBusqueda: string = ';'
   tiposHabitacionesFiltrados: TipoHabitacion[] = [];
 
-  constructor(private tipoHabitacionService: TipoHabitacionService, private router: Router){
+  hoteles: Hotel[] = [];
+  hotelSeleccionado?: number;
+
+
+  constructor(private tipoHabitacionService: TipoHabitacionService, private router: Router, private hotelService: HotelService){
 
   }
 
   ngOnInit(): void {
     this.listadoTiposHabitaciones();
+    this.cargarHoteles();
   }
 
   listadoTiposHabitaciones(): void {
@@ -47,6 +54,24 @@ export class TipoHabitacionComponent implements OnInit{
     this.tipoHabitacionService.buscarPorNombre(this.terminoBusqueda).subscribe({
       next: (data) => this.tiposHabitaciones = data,
       error: (err) => console.error('Error al buscar:', err)
+    });
+  }
+
+  cargarHoteles(): void {
+    this.hotelService.listadoHoteles().subscribe({
+      next: (data) => this.hoteles = data,
+      error: (err) => console.error(err)
+    });
+  }
+
+  onFiltrarPorHotel(): void {
+    if (!this.hotelSeleccionado) {
+      this.listadoTiposHabitaciones();
+      return;
+    }
+    this.tipoHabitacionService.buscarHotelPorId(this.hotelSeleccionado).subscribe({
+      next: (data) => this.tiposHabitaciones = data,
+      error: (err) => console.error(err)
     });
   }
 

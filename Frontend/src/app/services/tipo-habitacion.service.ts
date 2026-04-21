@@ -41,4 +41,8 @@ export class TipoHabitacionService {
     return this.http.get<TipoHabitacion[]>(`${this.url}/buscar?nombre=${nombre}`);
   }
 
+  buscarHotelPorId(hotelId: number): Observable<TipoHabitacion[]> {
+    return this.http.get<TipoHabitacion[]>(`${this.url}/hotel/${hotelId}`);
+  }
+
 }
