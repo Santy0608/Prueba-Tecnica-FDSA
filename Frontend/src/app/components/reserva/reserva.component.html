@@ -1,0 +1,89 @@
+<div class="row mb-4 align-items-center">
+    <div class="col-md-6">
+        <h1 class="h3 mb-0 text-danger">
+            <i class="bi bi-journal-check me-2"></i> Gestión de Reservas
+        </h1>
+        <small class="text-muted">Control de ocupación y estados de reserva en tiempo real.</small>
+    </div>
+
+    <div class="col-md-6 text-end">
+        <button class="btn btn-warning" (click)="onNuevaReserva()">
+            <i class="bi bi-plus-circle-fill me-1"></i> Nueva Reserva
+        </button>
+    </div>
+</div>
+
+@if(reservas.length > 0){
+    <div class="table-responsive shadow-sm">
+        <table class="table table-striped table-hover align-middle border">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Habitación</th>
+                    <th>Estancia (In/Out)</th>
+                    <th>Cant.</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                @for(reserva of reservas; track reserva.idReserva){
+                    <tr>
+                        <td class="text-start">
+                            <div class="fw-bold">{{ reserva.nombreCliente }}</div>
+                            <small class="text-primary">{{ reserva.emailCliente }}</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-info text-dark">
+                                {{ reserva.nombreTipoHabitacion }}
+                            </span>
+                        </td>
+                        <td class="small">
+                            <div><i class="bi bi-calendar-event me-1 text-success"></i> {{ reserva.fechaCheckin | date:'dd/MM/yy' }}</div>
+                            <div><i class="bi bi-calendar-x me-1 text-danger"></i> {{ reserva.fechaCheckout | date:'dd/MM/yy' }}</div>
+                        </td>
+                        <td>{{ reserva.cantidadHabitaciones }}</td>
+                        <td class="fw-bold text-success">
+                            ${{ reserva.precioTotal | number:'1.2-2' }}
+                        </td>
+                        <td>
+                            <span [class]="'badge ' + getBadgeClass(reserva.estado)">
+                                {{ reserva.estado }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-outline-warning btn-sm" (click)="onEditar(reserva)" title="Editar">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                
+                                <button *ngIf="reserva.estado !== 'CONFIRMADA'" 
+                                        class="btn btn-outline-success btn-sm" 
+                                        (click)="onCambiarEstado(reserva, 'CONFIRMADA')" 
+                                        title="Confirmar Reserva">
+                                    <i class="bi bi-check-lg"></i>
+                                </button>
+
+                                <button *ngIf="reserva.estado !== 'CANCELADA'" 
+                                        class="btn btn-outline-secondary btn-sm" 
+                                        (click)="onCambiarEstado(reserva, 'CANCELADA')" 
+                                        title="Cancelar">
+                                    <i class="bi bi-x-circle"></i>
+                                </button>
+
+                                <button class="btn btn-outline-danger btn-sm" (click)="onEliminar(reserva.idReserva)" title="Eliminar">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+} @else {
+    <div class="alert alert-warning text-center">
+        <i class="bi bi-info-circle-fill me-2"></i> No se han encontrado reservas en el sistema.
+    </div>
+}

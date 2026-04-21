@@ -1,6 +1,6 @@
 export class Reserva{
 
-    idReserva!: number;
+    id!: number;
     nombreCliente?: string;
     emailCliente?: string;
     telefonoCliente?: string;

@@ -7,6 +7,7 @@ import { TipoHabitacionFormComponent } from './components/tipo-habitacion-form/t
 import { Disponibilidad } from './domain/Disponibilidad';
 import { DisponibilidadComponent } from './components/disponibilidad/disponibilidad.component';
 import { DisponibilidadFormComponent } from './components/disponibilidad-form/disponibilidad-form.component';
+import { ReservaComponent } from './components/reserva/reserva.component';
 
 export const routes: Routes = [
 
@@ -25,11 +26,14 @@ export const routes: Routes = [
             { path: 'tipos-habitaciones/crear', component: TipoHabitacionFormComponent},
             { path: 'tipos-habitaciones/editar-tipo-habitacion/:idTipoHabitacion', component: TipoHabitacionFormComponent},
 
-            //Reglas para disponibilidades
+            //Rutas para disponibilidades
             { path: 'disponibilidades', component: DisponibilidadComponent},
             { path: 'disponibilidades/configurar', component: DisponibilidadFormComponent},
-            { path: 'disponibilidades/editar-disponibilidad/:id', component: DisponibilidadFormComponent}
+            { path: 'disponibilidades/editar-disponibilidad/:id', component: DisponibilidadFormComponent},
 
+            //Rutas para reservas
+            { path: 'reservas', component: ReservaComponent}
+                
         ]
     }
 
