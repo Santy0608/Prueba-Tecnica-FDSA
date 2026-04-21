@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Reserva } from '../domain/Reserva';
 import { Observable } from 'rxjs';
@@ -34,5 +34,15 @@ export class ReservaService {
 
   eliminarReserva(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
+  }
+
+  filtrar(estado?: string, nombre?: string, fechaInicio?: string, fechaFin?: string): Observable<Reserva[]> {
+    let params = new HttpParams();
+    if (estado) params = params.set('estado', estado);
+    if (nombre) params = params.set('nombre', nombre);
+    if (fechaInicio) params = params.set('fechaInicio', fechaInicio);
+    if (fechaFin) params = params.set('fechaFin', fechaFin);
+
+    return this.http.get<Reserva[]>(`${this.url}/filtrar`, { params });
   }
 }

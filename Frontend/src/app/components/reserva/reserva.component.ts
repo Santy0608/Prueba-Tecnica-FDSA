@@ -5,10 +5,11 @@ import { Router, RouterModule } from '@angular/router';
 import { SharingDataServiceReserva } from '../sharing-data-services/sharing-data-service-reserva';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reserva',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './reserva.component.html',
   styleUrl: './reserva.component.css'
 })
@@ -17,6 +18,12 @@ export class ReservaComponent implements OnInit{
   reservas: Reserva[] = [];
   errors: any;
   estadoReserva = EstadoReserva;
+
+  estados = Object.values(EstadoReserva);
+  estadoFiltro: string = '';
+  nombreFiltro: string = '';
+  fechaInicio: string = '';
+  fechaFin: string = '';
 
   constructor(private reservaService: ReservaService, private router: Router, private sharingDataService: SharingDataServiceReserva){
 
@@ -36,6 +43,26 @@ export class ReservaComponent implements OnInit{
   OnSelectedReserva(reserva: Reserva): void {
     this.sharingDataService.editarReservaEventEmitter.emit(reserva);
     this.router.navigate(['/reservas/editar-reserva', reserva.id]);
+  }
+
+  onFiltrar(): void {
+    this.reservaService.filtrar(
+      this.estadoFiltro || undefined,
+      this.nombreFiltro || undefined,
+      this.fechaInicio || undefined,
+      this.fechaFin || undefined
+    ).subscribe({
+      next: (data) => this.reservas = data,
+      error: (err) => console.error(err)
+    });
+  }
+
+  onLimpiarFiltros(): void {
+    this.estadoFiltro = '';
+    this.nombreFiltro = '';
+    this.fechaInicio = '';
+    this.fechaFin = '';
+    this.listadoReservas();
   }
 
   onCambiarEstado(reserva: Reserva, estado: EstadoReserva): void {
