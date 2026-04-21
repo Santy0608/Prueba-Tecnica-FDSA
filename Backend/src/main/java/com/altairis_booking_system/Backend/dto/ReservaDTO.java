@@ -4,6 +4,7 @@ import com.altairis_booking_system.Backend.domain.EstadoReserva;
 import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -13,8 +14,8 @@ public class ReservaDTO {
     private String nombreCliente;
     private String emailCliente;
     private String telefonoCliente;
-    private Date fechaCheckin;
-    private Date fechaCheckout;
+    private LocalDate fechaCheckin;
+    private LocalDate fechaCheckout;
     private Integer cantidadHabitaciones;
     private BigDecimal precioTotal;
     private EstadoReserva estado;
@@ -56,19 +57,19 @@ public class ReservaDTO {
         this.telefonoCliente = telefonoCliente;
     }
 
-    public Date getFechaCheckin() {
+    public LocalDate getFechaCheckin() {
         return fechaCheckin;
     }
 
-    public void setFechaCheckin(Date fechaCheckin) {
+    public void setFechaCheckin(LocalDate fechaCheckin) {
         this.fechaCheckin = fechaCheckin;
     }
 
-    public Date getFechaCheckout() {
+    public LocalDate getFechaCheckout() {
         return fechaCheckout;
     }
 
-    public void setFechaCheckout(Date fechaCheckout) {
+    public void setFechaCheckout(LocalDate fechaCheckout) {
         this.fechaCheckout = fechaCheckout;
     }
 

@@ -1,9 +1,11 @@
 package com.altairis_booking_system.Backend.serviceImpl;
 
+import com.altairis_booking_system.Backend.domain.Disponibilidad;
 import com.altairis_booking_system.Backend.domain.EstadoReserva;
 import com.altairis_booking_system.Backend.domain.Reserva;
 import com.altairis_booking_system.Backend.domain.TipoHabitacion;
 import com.altairis_booking_system.Backend.dto.ReservaDTO;
+import com.altairis_booking_system.Backend.repository.DisponibilidadRepository;
 import com.altairis_booking_system.Backend.repository.ReservaRepository;
 import com.altairis_booking_system.Backend.repository.TipoHabitacionRepository;
 import com.altairis_booking_system.Backend.service.ReservaService;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,6 +26,9 @@ public class ReservaServiceImpl implements ReservaService {
     private ReservaRepository reservaRepository;
 
     @Autowired private TipoHabitacionRepository tipoHabitacionRepository;
+
+    @Autowired
+    private DisponibilidadRepository disponibilidadRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -46,6 +52,21 @@ public class ReservaServiceImpl implements ReservaService {
         TipoHabitacion tipo = tipoHabitacionRepository.findById(reservaDTO.getTipoHabitacionId())
                 .orElseThrow(() -> new RuntimeException("Tipo de habitación no encontrado"));
 
+        LocalDate fecha = reservaDTO.getFechaCheckin();
+        while (fecha.isBefore(reservaDTO.getFechaCheckin())){
+            Disponibilidad disponibilidad = disponibilidadRepository.
+                    findByTipoHabitacionIdAndFecha(tipo.getIdTipoHabitacion(), fecha)
+                    .orElseThrow(() -> new RuntimeException("No hay disponibilidad para esa fecha"));
+
+            if (disponibilidad.getCantidadDisponible() < reservaDTO.getCantidadHabitaciones()){
+                throw new RuntimeException("Stock insuficiente para la fecha: " + fecha);
+            }
+            disponibilidad.setCantidadDisponible(disponibilidad.getCantidadDisponible() - reservaDTO.getCantidadHabitaciones());
+            disponibilidadRepository.save(disponibilidad);
+
+            fecha = fecha.plusDays(1);
+        }
+
         Reserva reserva = toEntity(reservaDTO, tipo);
         return convertirADTO(reservaRepository.save(reserva));
     }
@@ -58,6 +79,22 @@ public class ReservaServiceImpl implements ReservaService {
 
         TipoHabitacion tipo = tipoHabitacionRepository.findById(reservaDTO.getTipoHabitacionId())
                 .orElseThrow(() -> new RuntimeException("Tipo de habitación no encontrado"));
+
+        boolean cancelando = reservaDTO.getEstado() == EstadoReserva.CANCELADA
+                && reserva.getEstado() != EstadoReserva.CANCELADA;
+
+        if (cancelando) {
+            LocalDate fecha = reserva.getFechaCheckin();
+            while (fecha.isBefore(reserva.getFechaCheckout())) {
+                disponibilidadRepository
+                        .findByTipoHabitacionIdAndFecha(tipo.getIdTipoHabitacion(), fecha)
+                        .ifPresent(disp -> {
+                            disp.setCantidadDisponible(disp.getCantidadDisponible() + reserva.getCantidadHabitaciones());
+                            disponibilidadRepository.save(disp);
+                        });
+                fecha = fecha.plusDays(1);
+            }
+        }
 
         reserva.setTipoHabitacion(tipo);
         reserva.setNombreCliente(reservaDTO.getNombreCliente());

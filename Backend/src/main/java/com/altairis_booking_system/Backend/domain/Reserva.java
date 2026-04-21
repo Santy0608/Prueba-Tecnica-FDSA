@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -25,9 +26,9 @@ public class Reserva {
     @Column(name = "telefono_cliente")
     private String telefonoCliente;
     @Column(name = "fecha_checkin")
-    private Date fechaCheckin;
+    private LocalDate fechaCheckin;
     @Column(name = "fecha_checkout")
-    private Date fechaCheckout;
+    private LocalDate fechaCheckout;
     @Column(name = "cantidad_habitaciones")
     private Integer cantidadHabitaciones;
     @Column(name = "precio_total")
@@ -83,19 +84,19 @@ public class Reserva {
         this.telefonoCliente = telefonoCliente;
     }
 
-    public Date getFechaCheckin() {
+    public LocalDate getFechaCheckin() {
         return fechaCheckin;
     }
 
-    public void setFechaCheckin(Date fechaCheckin) {
+    public void setFechaCheckin(LocalDate fechaCheckin) {
         this.fechaCheckin = fechaCheckin;
     }
 
-    public Date getFechaCheckout() {
+    public LocalDate getFechaCheckout() {
         return fechaCheckout;
     }
 
-    public void setFechaCheckout(Date fechaCheckout) {
+    public void setFechaCheckout(LocalDate fechaCheckout) {
         this.fechaCheckout = fechaCheckout;
     }
 
