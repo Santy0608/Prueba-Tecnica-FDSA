@@ -20,7 +20,9 @@ export const routes: Routes = [
             //Rutas para tipos de habitaciones
             { path: 'tipos-habitaciones', component: TipoHabitacionComponent},
             { path: 'tipos-habitaciones/crear', component: TipoHabitacionFormComponent},
-            { path: 'tipos-habitaciones/editar-tipo-habitacion:idTipoHabitacion', component: TipoHabitacionFormComponent}
+            { path: 'tipos-habitaciones/editar-tipo-habitacion/:idTipoHabitacion', component: TipoHabitacionFormComponent}
+
+            
         ]
     }
 
