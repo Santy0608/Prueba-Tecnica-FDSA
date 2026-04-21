@@ -1,66 +1,75 @@
 <div class="row mb-4 align-items-center">
     <div class="col-md-6">
         <h1 class="h3 mb-0 text-danger">
-            <i class="bi bi-tags-fill me-2"></i> Gestión de Hoteles
+            <i class="bi bi-building-fill me-2"></i> Gestión de Hoteles
         </h1>
-        <small class="text-muted">Administración y clasificación de hoteles para el sistema.</small>
+        <small class="text-muted">Administración y configuración de sedes Altairis.</small>
     </div>
 
     <div class="col-md-6 text-end">
-                <button class="btn btn-warning" [routerLink]="['/hoteles/crear']">
-                    <i class="bi bi-plus-circle-fill me-1"></i> Crear Hotel
-                </button>
-        </div>
-    
+        <button class="btn btn-warning" [routerLink]="['/hoteles/crear']">
+            <i class="bi bi-plus-circle-fill me-1"></i> Registrar Hotel
+        </button>
+    </div>
 </div>
 
 @if(hoteles.length > 0){
-    <div class="table-responsive">
+    <div class="table-responsive shadow-sm">
         <table class="table table-striped table-hover align-middle border">
-            <thead class="table-danger text-center">
+            <thead class="table-dark text-center">
                 <tr>
                     <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Ciduad</th>
-                    <th>País</th>
-                    <th>Telefono</th>
-                    <th>Email</th>
+                    <th>Ubicación</th>
+                    <th>Contacto</th>
                     <th>Estrellas</th>
-                    <th>Activo</th>
+                    <th>Estado</th>
                     <th>Actualizar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
                 @for(hotel of hoteles; track hotel.idHotel){
                     <tr>
-                        <td>{{ hotel.nombre }}</td>
-                        <td class="text-muted">{{ hotel.descripcion }}</td> 
-                        <td class="text-center">{{ hotel.ciudad }}</td>
-                        <td class="text-center">{{ hotel.pais }}</td>
-                        <td class="text-center">{{ hotel.telefono }}</td>
-                        <td class="text-center">{{ hotel.email }}</td>
-                        <td class="text-center">{{ hotel.estrellas }}</td>
-                        <td class="text-center">{{ hotel.activo }}</td>
-                            <td class="text-center">
-                                <button 
-                                    class="btn btn-warning btn-sm"
-                                    (click)="OnSelectedHotel(hotel)"
-                                    title="Editar"
-                                >
-                                    <i class="bi bi-pencil-square"></i>  Actualizar
-                                </button>
-                            </td>
-                            <td>
-                                <button 
-                                    class="btn btn-danger btn-sm"
-                                    (click)="eliminarHotel(hotel.idHotel)"
-                                    title="Eliminar"
-                                >
-                                    <i class="bi bi-trash-fill"></i>
-                                    Eliminar
-                                    </button>
-                            </td>
+                        <td class="fw-bold text-start ps-3">{{ hotel.nombre }}</td>
+                        <td>
+                            <span class="badge bg-info text-dark">
+                                <i class="bi bi-geo-alt-fill me-1"></i> {{ hotel.ciudad }}, {{ hotel.pais }}
+                            </span>
+                        </td>
+                        <td class="text-start small">
+                            <div><i class="bi bi-telephone me-1"></i> {{ hotel.telefono }}</div>
+                            <div class="text-primary"><i class="bi bi-envelope me-1"></i> {{ hotel.email }}</div>
+                        </td>
+                        <td class="text-warning">
+                            @for(star of [].constructor(hotel.estrellas); track $index){
+                                <i class="bi bi-star-fill"></i>
+                            }
+                        </td>
+                        <td>
+                            @if(hotel.activo){
+                                <span class="badge bg-success">Activo</span>
+                            } @else {
+                                <span class="badge bg-secondary">Inactivo</span>
+                            }
+                        </td>
+                        <td>
+                            <button 
+                                class="btn btn-warning btn-sm"
+                                (click)="OnSelectedHotel(hotel)"
+                                title="Editar"
+                            >
+                                <i class="bi bi-pencil-square"></i> Actualizar
+                            </button>
+                        </td>
+                        <td>
+                            <button 
+                                class="btn btn-danger btn-sm"
+                                (click)="eliminarHotel(hotel.idHotel)"
+                                title="Eliminar"
+                            >
+                                <i class="bi bi-trash-fill"></i> Eliminar
+                            </button>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -68,6 +77,6 @@
     </div>
 } @else {
     <div class="alert alert-warning text-center">
-        <i class="bi bi-exclamation-triangle-fill me-2"></i> No hay registros de Hoteles en el sistema.
+        <i class="bi bi-info-circle-fill me-2"></i> No hay hoteles registrados en el sistema.
     </div>
 }

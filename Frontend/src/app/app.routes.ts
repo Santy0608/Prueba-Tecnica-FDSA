@@ -3,6 +3,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { HotelComponent } from './components/hotel/hotel.component';
 import { HotelFormComponent } from './components/hotel-form/hotel-form.component';
 import { TipoHabitacionComponent } from './components/tipo-habitacion/tipo-habitacion.component';
+import { TipoHabitacionFormComponent } from './components/tipo-habitacion-form/tipo-habitacion-form.component';
 
 export const routes: Routes = [
 
@@ -17,7 +18,9 @@ export const routes: Routes = [
             { path: '', redirectTo: 'hoteles', pathMatch: 'full' },
 
             //Rutas para tipos de habitaciones
-            { path: 'tipos-habitaciones', component: TipoHabitacionComponent}
+            { path: 'tipos-habitaciones', component: TipoHabitacionComponent},
+            { path: 'tipos-habitaciones/crear', component: TipoHabitacionFormComponent},
+            { path: 'tipos-habitaciones/editar-tipo-habitacion:idTipoHabitacion', component: TipoHabitacionFormComponent}
         ]
     }
 

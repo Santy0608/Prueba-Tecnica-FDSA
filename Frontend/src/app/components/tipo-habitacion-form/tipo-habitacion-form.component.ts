@@ -11,7 +11,7 @@ import { Hotel } from '../../domain/Hotel';
 
 @Component({
   selector: 'app-tipo-habitacion-form',
-  imports: [NgModel, CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './tipo-habitacion-form.component.html',
   styleUrl: './tipo-habitacion-form.component.css'
 })
