@@ -101,4 +101,13 @@ public class HotelServiceImpl implements HotelService {
         dto.setCreated_at(hotel.getCreatedAt());
         return dto;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<HotelDTO> buscarPorNombre(String nombre) {
+        return hotelRepository.findByNombreContaining(nombre)
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
 }

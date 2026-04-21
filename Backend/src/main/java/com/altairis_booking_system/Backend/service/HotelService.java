@@ -20,6 +20,7 @@ public interface HotelService {
 
     HotelDTO convertirADTO(Hotel hotel);
 
+    List<HotelDTO> buscarPorNombre(String nombre);
 
 }
 

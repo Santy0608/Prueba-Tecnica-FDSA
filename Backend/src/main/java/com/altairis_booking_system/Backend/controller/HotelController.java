@@ -69,6 +69,11 @@ public class HotelController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/buscar")
+    public ResponseEntity<List<HotelDTO>> buscar(@RequestParam String nombre) {
+        return ResponseEntity.ok(hotelService.buscarPorNombre(nombre));
+    }
+
     private static ResponseEntity<Map<String, String>> validation(BindingResult result) {
         if (result.hasErrors()){
             Map<String, String> errors = new HashMap<>();

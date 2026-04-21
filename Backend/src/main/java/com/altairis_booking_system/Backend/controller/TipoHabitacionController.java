@@ -36,6 +36,11 @@ public class TipoHabitacionController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/buscar")
+    public ResponseEntity<List<TipoHabitacionDTO>> buscar(@RequestParam String nombre) {
+        return ResponseEntity.ok(tipoHabitacionService.buscarTipoHabitacionPorNombre(nombre));
+    }
+
     @PostMapping
     public ResponseEntity<?> guardarTipoHabitacion(@RequestBody TipoHabitacionDTO tipoHabitacionDTO, BindingResult result){
         ResponseEntity<Map<String, String>> errors = validation(result);

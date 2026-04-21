@@ -99,4 +99,13 @@ public class TipoHabitacionServiceImpl implements TipoHabitacionService {
         }
         return dto;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TipoHabitacionDTO> buscarTipoHabitacionPorNombre(String nombre) {
+        return tipoHabitacionRepository.findByNombreContaining(nombre)
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
 }

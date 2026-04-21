@@ -20,4 +20,6 @@ public interface TipoHabitacionService {
 
     TipoHabitacionDTO convertirADTO(TipoHabitacion tipoHabitacion);
 
+    List<TipoHabitacionDTO> buscarTipoHabitacionPorNombre(String nombre);
+
 }
