@@ -1,1 +1,80 @@
-<p>disponibilidad works!</p>
+<div class="row mb-4 align-items-center">
+    <div class="col-md-6">
+        <h1 class="h3 mb-0 text-danger">
+            <i class="bi bi-calendar-check-fill me-2"></i> Control de Disponibilidad
+        </h1>
+        <small class="text-muted">Monitoreo de inventario y precios por fecha.</small>
+    </div>
+
+    <div class="col-md-6 text-end">
+        <button class="btn btn-warning" [routerLink]="['/disponibilidad/configurar']">
+            <i class="bi bi-gear-fill me-1"></i> Ajustar Disponibilidad
+        </button>
+    </div>
+</div>
+
+@if(disponibilidades.length > 0){
+    <div class="table-responsive shadow-sm">
+        <table class="table table-striped table-hover align-middle border">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Tipo de Habitación</th>
+                    <th>Capacidad Total</th>
+                    <th>Disponible</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Actualizar</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                @for(disp of disponibilidades; track disp.id){
+                    <tr>
+                        <td class="fw-bold">
+                            <i class="bi bi-calendar3 me-2 text-primary"></i>
+                            {{ disp.fecha | date:'dd/MM/yyyy' }}
+                        </td>
+                        <td class="text-start ps-3">
+                            <span class="badge bg-info text-dark">
+                                {{ disp.nombreTipoHabitacion }}
+                            </span>
+                        </td>
+                        <td>{{ disp.cantidadTotal }}</td>
+                        <td>
+                            <strong [ngClass]="{
+                                'text-success': disp.cantidadDisponible! > 5,
+                                'text-warning': disp.cantidadDisponible! <= 5 && disp.cantidadDisponible! > 0,
+                                'text-danger': disp.cantidadDisponible === 0
+                            }">
+                                {{ disp.cantidadDisponible }}
+                            </strong>
+                        </td>
+                        <td class="fw-bold text-success">
+                            ${{ disp.precio | number:'1.2-2' }}
+                        </td>
+                        <td>
+                            @if(disp.cantidadDisponible! > 0){
+                                <span class="badge bg-success">En Venta</span>
+                            } @else {
+                                <span class="badge bg-danger">Agotado</span>
+                            }
+                        </td>
+                        <td>
+                            <button 
+                                class="btn btn-warning btn-sm"
+                                (click)="OnSelectedDisponibilidad(disp)"
+                                title="Editar"
+                            >
+                                <i class="bi bi-pencil-square"></i> Actualizar
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+} @else {
+    <div class="alert alert-warning text-center">
+        <i class="bi bi-info-circle-fill me-2"></i> No se han generado registros de disponibilidad para este periodo.
+    </div>
+}

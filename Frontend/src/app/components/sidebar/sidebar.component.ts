@@ -12,7 +12,7 @@ export class SidebarComponent {
   menuItems = [
     { label: 'Hoteles', icon: '🏨', route: '/hoteles' },
     { label: 'Habitaciones', icon: '🛏️', route: '/tipos-habitaciones' },
-    { label: 'Disponibilidad', icon: '📅', route: '/disponibilidad' },
+    { label: 'Disponibilidad', icon: '📅', route: '/disponibilidades' },
     { label: 'Reservas', icon: '📋', route: '/reservas' }
   ];
 }
