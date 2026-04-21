@@ -8,9 +8,8 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a>
     <p class="nav-label">MENU</p>
-    
+    <a>
       *ngFor="let item of menuItems"
       [routerLink]="item.route"
       routerLinkActive="active"
@@ -19,6 +18,7 @@
       <span class="label">{{ item.label }}</span>
     </a>
   </nav>
+  
 
   <div class="sidebar-footer">
     <div class="avatar">OP</div>
