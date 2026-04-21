@@ -24,11 +24,14 @@
                     <th>Cant.</th>
                     <th>Total</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
+                    <th>Actualizar</th>
+                    <th>Eliminar</th>
+                    <th>Confirmar</th>
+                    <th>Cancelar</th>
                 </tr>
             </thead>
             <tbody class="text-center">
-                @for(reserva of reservas; track reserva.idReserva){
+                @for(reserva of reservas; track reserva.id){
                     <tr>
                         <td class="text-start">
                             <div class="fw-bold">{{ reserva.nombreCliente }}</div>
@@ -54,28 +57,25 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button class="btn btn-outline-warning btn-sm" (click)="onEditar(reserva)" title="Editar">
+                                <button class="btn btn-warning btn-sm" (click)="OnSelectedReserva(reserva)" title="Editar">
                                     <i class="bi bi-pencil-square"></i>
+                                    Actualizar
                                 </button>
-                                
-                                <button *ngIf="reserva.estado !== 'CONFIRMADA'" 
-                                        class="btn btn-outline-success btn-sm" 
-                                        (click)="onCambiarEstado(reserva, 'CONFIRMADA')" 
-                                        title="Confirmar Reserva">
-                                    <i class="bi bi-check-lg"></i>
-                                </button>
-
-                                <button *ngIf="reserva.estado !== 'CANCELADA'" 
-                                        class="btn btn-outline-secondary btn-sm" 
-                                        (click)="onCambiarEstado(reserva, 'CANCELADA')" 
-                                        title="Cancelar">
-                                    <i class="bi bi-x-circle"></i>
-                                </button>
-
-                                <button class="btn btn-outline-danger btn-sm" (click)="onEliminar(reserva.idReserva)" title="Eliminar">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
+                
+                            
                             </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="eliminarReserva(reserva.id)" title="Eliminar">
+                                <i class="bi bi-trash-fill"></i>
+                                Eliminar
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn-confirm" (click)="onCambiarEstado(reserva, estadoReserva.CONFIRMADA)">Confirmar</button>
+                        </td>
+                        <td>
+                            <button class="btn-cancel" (click)="onCambiarEstado(reserva, estadoReserva.CANCELADA)">Cancelar</button>
                         </td>
                     </tr>
                 }

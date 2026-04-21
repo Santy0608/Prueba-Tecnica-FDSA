@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+        <div class="card shadow-lg border-0">
+            
+            <div class="card-header bg-danger text-white">
+                <h2 class="h4 mb-0">
+                    <i class="bi bi-journal-plus me-2"></i> 
+                    {{ esEdicion ? 'Actualizar Reserva #' + reserva.id : 'Registrar Nueva Reserva' }}
+                </h2>
+            </div>
+            
+            <form #reservaForm="ngForm" (ngSubmit)="onSubmit(reservaForm)">
+                <div class="card-body p-4">
+                    
+                    <h5 class="text-primary border-bottom pb-2 mb-3"><i class="bi bi-person-lines-fill me-2"></i>Datos del Cliente</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Nombre Completo <span class="text-danger">*</span></label>
+                            <input type="text" name="nombreCliente" [(ngModel)]="reserva.nombreCliente" required class="form-control" placeholder="Ej: Juan Pérez" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Correo Electrónico</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" name="emailCliente" [(ngModel)]="reserva.emailCliente" class="form-control" placeholder="juan@ejemplo.com" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Teléfono de Contacto</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                <input type="text" name="telefonoCliente" [(ngModel)]="reserva.telefonoCliente" class="form-control" placeholder="+506 8888-8888" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Tipo de Habitación <span class="text-danger">*</span></label>
+                            <select name="tipoHabitacionId" [(ngModel)]="reserva.tipoHabitacionId" required class="form-select">
+                                <option [ngValue]="undefined" disabled selected>-- Seleccione Categoría --</option>
+                                <option *ngFor="let tipo of tiposHabitaciones" [value]="tipo.idTipoHabitacion">
+                                    {{ tipo.nombre }} - {{ tipo.nombreHotel }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h5 class="text-primary border-bottom pb-2 mb-3 mt-4"><i class="bi bi-calendar-check me-2"></i>Detalles de la Estancia</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Fecha Check-in <span class="text-danger">*</span></label>
+                            <input type="date" name="fechaCheckin" [(ngModel)]="reserva.fechaCheckin" required class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Fecha Check-out <span class="text-danger">*</span></label>
+                            <input type="date" name="fechaCheckout" [(ngModel)]="reserva.fechaCheckout" required class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold">Habitaciones <span class="text-danger">*</span></label>
+                            <input type="number" name="cantidadHabitaciones" [(ngModel)]="reserva.cantidadHabitaciones" min="1" required class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold">Precio Total ($)</label>
+                            <div class="input-group">
+                                <span class="input-group-text text-success fw-bold">$</span>
+                                <input type="number" name="precioTotal" [(ngModel)]="reserva.precioTotal" min="0" class="form-control fw-bold" placeholder="0.00" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3" *ngIf="esEdicion">
+                            <label class="form-label fw-bold">Estado de Reserva</label>
+                            <select name="estado" [(ngModel)]="reserva.estado" class="form-select border-primary">
+                                <option *ngFor="let e of estados" [value]="e">{{ e }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 mt-2">
+                        <label class="form-label fw-bold">Notas Adicionales / Requerimientos Especiales</label>
+                        <textarea name="notas" [(ngModel)]="reserva.notas" rows="3" class="form-control" placeholder="Ej: Habitación en piso alto, cuna para bebé..."></textarea>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-end align-items-center">
+                        <span class="text-muted small me-auto">* Campos obligatorios</span>
+                        <button type="button" class="btn btn-outline-secondary me-2" (click)="onCancelar()">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-warning" [disabled]="reservaForm.invalid">
+                            <i class="bi bi-save-fill me-1"></i> 
+                            {{ esEdicion ? 'Actualizar Reserva' : 'Confirmar Registro' }}
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

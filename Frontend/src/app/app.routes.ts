@@ -8,6 +8,7 @@ import { Disponibilidad } from './domain/Disponibilidad';
 import { DisponibilidadComponent } from './components/disponibilidad/disponibilidad.component';
 import { DisponibilidadFormComponent } from './components/disponibilidad-form/disponibilidad-form.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
+import { ReservaFormComponent } from './components/reserva-form/reserva-form.component';
 
 export const routes: Routes = [
 
@@ -32,8 +33,10 @@ export const routes: Routes = [
             { path: 'disponibilidades/editar-disponibilidad/:id', component: DisponibilidadFormComponent},
 
             //Rutas para reservas
-            { path: 'reservas', component: ReservaComponent}
-                
+            { path: 'reservas', component: ReservaComponent},
+            { path: 'reservas/crear', component: ReservaFormComponent},
+            { path: 'reservas/editar-reserva/:id', component: ReservaFormComponent}
+
         ]
     }
 

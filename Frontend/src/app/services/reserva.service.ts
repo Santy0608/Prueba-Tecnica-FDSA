@@ -25,7 +25,7 @@ export class ReservaService {
   }
 
   editarReserva(reserva: Reserva): Observable<Reserva> {
-    return this.http.put<Reserva>(`${this.url}/${reserva.idReserva}`, reserva);
+    return this.http.put<Reserva>(`${this.url}/${reserva.id}`, reserva);
   }
 
   actualizarEstado(id: number, estado: string): Observable<void> {

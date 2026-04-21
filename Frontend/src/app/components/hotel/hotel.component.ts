@@ -4,17 +4,19 @@ import { Router, RouterModule } from '@angular/router';
 import { Hotel } from '../../domain/Hotel';
 import { HotelService } from '../../services/hotel.service';
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-hotel',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './hotel.component.html',
   styleUrl: './hotel.component.css'
 })
 export class HotelComponent implements OnInit{
 
   hoteles: Hotel[] = [];
-  errors: any;
+  errors: any;  
+  terminoBusqueda: string = '';
 
   constructor(private hotelService: HotelService, private router: Router){
 
@@ -33,6 +35,17 @@ export class HotelComponent implements OnInit{
       error: (err) => {
         console.error('Error al cargar hoteles:', err);
       }
+    });
+  }
+
+  onBuscar(): void {
+    if (this.terminoBusqueda.trim() === '') {
+      this.listadoHoteles(); 
+      return;
+    }
+    this.hotelService.buscarPorNombre(this.terminoBusqueda).subscribe({
+      next: (data) => this.hoteles = data,
+      error: (err) => console.error('Error al buscar:', err)
     });
   }
 

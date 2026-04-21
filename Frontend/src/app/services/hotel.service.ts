@@ -17,10 +17,13 @@ export class HotelService {
   listadoHoteles(): Observable<Hotel[]>{
     return this.http.get<Hotel[]>(this.url);
   }
-    
         
   buscarHotelPorId(id: number): Observable<Hotel>{
     return this.http.get<Hotel>(`${this.url}/${id}`);
+  }
+
+  buscarPorNombre(nombre: string): Observable<Hotel[]> {
+    return this.http.get<Hotel[]>(`${this.url}/buscar?nombre=${nombre}`);
   }
     
   guardarHotel(hotel: Hotel){

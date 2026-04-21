@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { TipoHabitacionService } from '../../services/tipo-habitacion.service';
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tipo-habitacion',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './tipo-habitacion.component.html',
   styleUrl: './tipo-habitacion.component.css'
 })
@@ -15,6 +16,7 @@ export class TipoHabitacionComponent implements OnInit{
 
   tiposHabitaciones: TipoHabitacion[] = [];
   errors: any;
+  terminoBusqueda: string = ';'
 
   constructor(private tipoHabitacionService: TipoHabitacionService, private router: Router){
 
@@ -33,6 +35,17 @@ export class TipoHabitacionComponent implements OnInit{
       error: (err) => {
         console.error('Error al cargar tipos de habitaciones:', err);
       }
+    });
+  }
+
+  onBuscar(): void {
+    if (this.terminoBusqueda.trim() === '') {
+      this.listadoTiposHabitaciones(); 
+      return;
+    }
+    this.tipoHabitacionService.buscarPorNombre(this.terminoBusqueda).subscribe({
+      next: (data) => this.tiposHabitaciones = data,
+      error: (err) => console.error('Error al buscar:', err)
     });
   }
 

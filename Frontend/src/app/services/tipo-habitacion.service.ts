@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TipoHabitacion } from '../domain/TipoHabitacion';
+import { Hotel } from '../domain/Hotel';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class TipoHabitacionService {
 
   eliminarTipoHabitacionPorId(idTipoHabitacion: number){
     return this.http.delete(`${this.url}/${idTipoHabitacion}`);
+  }
+
+  buscarPorNombre(nombre: string): Observable<TipoHabitacion[]> {
+    return this.http.get<TipoHabitacion[]>(`${this.url}/buscar?nombre=${nombre}`);
   }
 
 }

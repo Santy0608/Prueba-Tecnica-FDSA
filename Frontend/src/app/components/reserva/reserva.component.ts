@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { EstadoReserva, Reserva } from '../../domain/Reserva';
 import { ReservaService } from '../../services/reserva.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SharingDataServiceReserva } from '../sharing-data-services/sharing-data-service-reserva';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reserva',
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './reserva.component.html',
   styleUrl: './reserva.component.css'
 })
@@ -55,6 +56,10 @@ export class ReservaComponent implements OnInit{
         });
       }
     });
+  }
+
+  onNuevaReserva(): void {
+    this.router.navigate(['/reservas/crear']);
   }
 
   eliminarReserva(id: number): void {
