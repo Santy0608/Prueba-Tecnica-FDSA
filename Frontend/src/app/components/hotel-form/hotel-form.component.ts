@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HotelService } from '../../services/hotel.service';
 import { SharingDataServiceHotel } from '../sharing-data-services/sharing-data-service-hotel';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-hotel-form',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './hotel-form.component.html',
   styleUrl: './hotel-form.component.css'
 })

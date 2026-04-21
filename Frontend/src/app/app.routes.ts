@@ -11,7 +11,7 @@ export const routes: Routes = [
         children: [
             { path: 'hoteles', component: HotelComponent },
             { path: 'hoteles/crear', component: HotelFormComponent},
-            { path: 'hoteles/editar-hotel', component: HotelFormComponent},
+            { path: 'hoteles/editar-hotel/:idHotel', component: HotelFormComponent},
             { path: '', redirectTo: 'hoteles', pathMatch: 'full' }
         ]
     }

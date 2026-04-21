@@ -2,7 +2,7 @@
     <div class="col-lg-8 col-md-10">
         <div class="card shadow-lg border-0">
             
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-danger text-white">
                 <h2 class="h4 mb-0">
                     <i class="bi bi-building-fill me-2"></i> 
                     {{ hotel.idHotel > 0 ? "Actualizar Información del Hotel" : "Registrar Nuevo Hotel" }}
@@ -92,7 +92,7 @@
                         
                         <button 
                             type="submit" 
-                            class="btn btn-primary" 
+                            class="btn btn-warning" 
                             [disabled]="hotelForm.invalid"
                         >
                             <i class="bi bi-save-fill me-1"></i> 
