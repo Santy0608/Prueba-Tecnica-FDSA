@@ -32,7 +32,7 @@ public class TipoHabitacion {
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_hotel", nullable = false)
+    @JoinColumn(name = "hotel_id", nullable = false)
     private Hotel hotel;
 
     public Long getIdTipoHabitacion() {

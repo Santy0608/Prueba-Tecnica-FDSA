@@ -30,7 +30,7 @@ public class Disponibilidad {
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_tipo_habitacion", nullable = false)
+    @JoinColumn(name = "tipo_habitacion_id", nullable = false)
     private TipoHabitacion tipoHabitacion;
 
     public Long getId() {
