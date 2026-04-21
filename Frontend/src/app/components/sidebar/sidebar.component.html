@@ -1,16 +1,29 @@
 <aside class="sidebar">
   <div class="sidebar-header">
-    <h2>Altairis</h2>
+    <div class="logo-icon">A</div>
+    <div class="logo-text">
+      <h2>Altairis</h2>
+      <span>Backoffice Operativo</span>
+    </div>
   </div>
 
   <nav class="sidebar-nav">
-    <a
+    <p class="nav-label">MENU</p>
+    
       *ngFor="let item of menuItems"
       [routerLink]="item.route"
       routerLinkActive="active"
       class="nav-item">
-      <span class="icon">{{ item.icon }}</span>
+      <span class="nav-icon">{{ item.initials }}</span>
       <span class="label">{{ item.label }}</span>
     </a>
   </nav>
+
+  <div class="sidebar-footer">
+    <div class="avatar">OP</div>
+    <div class="user-info">
+      <span class="user-name">Operador</span>
+      <span class="user-email">operador@altairis.com</span>
+    </div>
+  </div>
 </aside>

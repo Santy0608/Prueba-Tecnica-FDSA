@@ -1,7 +1,8 @@
 .sidebar {
-  width: 240px;
+  width: 250px;
   height: 100vh;
-  background-color: #f32f2f;
+  background-color: #c0392b;
+  background-image: linear-gradient(180deg, #c0392b 0%, #a93226 100%);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -9,39 +10,136 @@
   top: 0;
 
   .sidebar-header {
-    padding: 24px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
 
-    h2 {
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 500;
       color: white;
-      font-size: 1.4rem;
-      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      h2 {
+        color: white;
+        font-size: 15px;
+        font-weight: 500;
+        margin: 0;
+      }
+      span {
+        font-size: 11px;
+        color: rgba(255,255,255,0.55);
+      }
     }
   }
 
   .sidebar-nav {
     display: flex;
     flex-direction: column;
-    padding: 16px 0;
+    padding: 16px 10px 0;
+    flex: 1;
+
+    .nav-label {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.4);
+      padding: 0 10px;
+      margin: 0 0 8px;
+    }
 
     .nav-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 20px;
-      color: rgba(255,255,255,0.7);
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.65);
       text-decoration: none;
       transition: all 0.2s;
+      margin-bottom: 2px;
+
+      .nav-icon {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        background: rgba(255,255,255,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: rgba(255,255,255,0.7);
+        flex-shrink: 0;
+      }
 
       &:hover {
-        background-color: rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.1);
         color: white;
+
+        .nav-icon {
+          background: rgba(255,255,255,0.2);
+          color: white;
+        }
       }
 
       &.active {
-        background-color: rgba(255,255,255,0.15);
+        background: rgba(255,255,255,0.15);
         color: white;
-        border-left: 3px solid #4f9cf9;
+        border-left: 3px solid white;
+        border-radius: 0 8px 8px 0;
+
+        .nav-icon {
+          background: rgba(255,255,255,0.25);
+          color: white;
+        }
+      }
+    }
+  }
+
+  .sidebar-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 500;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+
+      .user-name {
+        font-size: 12px;
+        color: white;
+        font-weight: 500;
+      }
+
+      .user-email {
+        font-size: 10px;
+        color: rgba(255,255,255,0.5);
       }
     }
   }

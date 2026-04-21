@@ -10,9 +10,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SidebarComponent {
   menuItems = [
-    { label: 'Hoteles', icon: '🏨', route: '/hoteles' },
-    { label: 'Habitaciones', icon: '🛏️', route: '/tipos-habitaciones' },
-    { label: 'Disponibilidad', icon: '📅', route: '/disponibilidades' },
-    { label: 'Reservas', icon: '📋', route: '/reservas' }
+    { label: 'Hoteles', initials: 'H', route: '/hoteles' },
+    { label: 'Tipos de Habitación', initials: 'T', route: '/habitaciones' },
+    { label: 'Disponibilidad', initials: 'D', route: '/disponibilidad' },
+    { label: 'Reservas', initials: 'R', route: '/reservas' }
   ];
 }
