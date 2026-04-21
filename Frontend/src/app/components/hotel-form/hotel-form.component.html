@@ -1,1 +1,107 @@
-<p>hotel-form works!</p>
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <div class="card shadow-lg border-0">
+            
+            <div class="card-header bg-primary text-white">
+                <h2 class="h4 mb-0">
+                    <i class="bi bi-building-fill me-2"></i> 
+                    {{ hotel.idHotel > 0 ? "Actualizar Información del Hotel" : "Registrar Nuevo Hotel" }}
+                </h2>
+            </div>
+            
+            <form (ngSubmit)="onSubmit(hotelForm)" #hotelForm="ngForm">
+                <div class="card-body p-4">
+                    
+                    <input type="hidden" name="idHotel" [(ngModel)]="hotel.idHotel" />
+
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label for="nombre" class="form-label fw-bold">Nombre del Hotel <span class="text-danger">*</span></label>
+                            <input
+                                placeholder="Ej: Altairis Resort & Spa"
+                                required
+                                #nombre="ngModel"
+                                name="nombre"
+                                [(ngModel)]="hotel.nombre"
+                                type="text"
+                                class="form-control"
+                            />
+                            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mt-1 small">
+                                El nombre del hotel es obligatorio.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="estrellas" class="form-label fw-bold">Estrellas</label>
+                            <select name="estrellas" [(ngModel)]="hotel.estrellas" class="form-select">
+                                <option [ngValue]="1">1 Estrella</option>
+                                <option [ngValue]="2">2 Estrellas</option>
+                                <option [ngValue]="3">3 Estrellas</option>
+                                <option [ngValue]="4">4 Estrellas</option>
+                                <option [ngValue]="5">5 Estrellas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label fw-bold">Descripción del Hotel</label>
+                        <textarea
+                            placeholder="Detalle las características y servicios del hotel..."
+                            name="descripcion"
+                            [(ngModel)]="hotel.descripcion"
+                            class="form-control"
+                            rows="3"
+                        ></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="ciudad" class="form-label fw-bold">Ciudad</label>
+                            <input type="text" name="ciudad" [(ngModel)]="hotel.ciudad" class="form-control" placeholder="Ej: San José">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="pais" class="form-label fw-bold">País</label>
+                            <input type="text" name="pais" [(ngModel)]="hotel.pais" class="form-control" placeholder="Ej: Costa Rica">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label fw-bold">Correo Electrónico</label>
+                            <input type="email" name="email" [(ngModel)]="hotel.email" class="form-control" placeholder="reservas@hotel.com">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="telefono" class="form-label fw-bold">Teléfono de Contacto</label>
+                            <input type="text" name="telefono" [(ngModel)]="hotel.telefono" class="form-control" placeholder="+506 0000-0000">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="activo" [(ngModel)]="hotel.activo" id="switchActivo">
+                            <label class="form-check-label fw-bold" for="switchActivo">Hotel disponible para reservas</label>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-end">
+                        <a [routerLink]="['/hoteles']" class="btn btn-outline-secondary me-2">
+                            <i class="bi bi-arrow-left"></i> Cancelar
+                        </a>
+                        
+                        <button 
+                            type="submit" 
+                            class="btn btn-primary" 
+                            [disabled]="hotelForm.invalid"
+                        >
+                            <i class="bi bi-save-fill me-1"></i> 
+                            {{ hotel.idHotel > 0 ? 'Guardar Cambios' : 'Registrar Hotel' }} 
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -37,7 +37,7 @@ export class HotelComponent implements OnInit{
   }
 
   OnSelectedHotel(hotel: Hotel): void{
-    this.router.navigate(['/app/hoteles/editar-hotel', hotel.idHotel]);
+    this.router.navigate(['/hoteles/editar-hotel', hotel.idHotel]);
   }
 
   eliminarHotel(idHotel: number): void {
