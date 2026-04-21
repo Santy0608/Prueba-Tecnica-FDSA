@@ -2,6 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Disponibilidad } from '../domain/Disponibilidad';
+import { environment } from '../../environments/environment'; 
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ import { Disponibilidad } from '../domain/Disponibilidad';
 export class DisponibilidadService {
 
   
-  private url: string = 'http://localhost:8080/api/disponibilidades';
+  private url: string = '${environment.apiUrl}/disponibilidades';
 
   constructor(private http: HttpClient) { 
 

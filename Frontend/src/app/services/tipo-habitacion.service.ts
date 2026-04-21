@@ -9,7 +9,7 @@ import { Hotel } from '../domain/Hotel';
 })
 export class TipoHabitacionService {
 
-   private url: string = 'http://localhost:8080/api/tipos-habitaciones';
+   private url: string = '${environment.apiUrl}/tipos-habitaciones';
 
   constructor(private http: HttpClient) { 
 

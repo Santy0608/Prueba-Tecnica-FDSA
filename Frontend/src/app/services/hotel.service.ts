@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Hotel } from '../domain/Hotel';
+import { environment } from '../../environments/environment'; 
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HotelService {
 
-  private url: string = 'http://localhost:8080/api/hoteles';
+  private url: string = '${environment.apiUrl}/hoteles';
 
   constructor(private http: HttpClient) { 
 
